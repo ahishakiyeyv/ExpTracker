@@ -49,7 +49,7 @@ class _MyChartState extends State<MyChart> {
           case 2:
             return makeGroupData(2, 2);
           case 3:
-            return makeGroupData(3, 4.5);
+            return makeGroupData(3, 4.6);
           case 4:
             return makeGroupData(4, 3.8);
           case 5:
