@@ -26,6 +26,8 @@ class _AddExpenseState extends State<AddExpense> {
     'travel'
   ];
 
+  String iconSelected = '';
+
   @override
   void initState() {
     dateController.text = DateFormat('dd/MM/yy').format(DateTime.now());
@@ -105,19 +107,23 @@ class _AddExpenseState extends State<AddExpense> {
                                   content: Column(
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
-                                      TextFormField(
-                                        // controller: dateController,
-                                        textAlignVertical:
-                                            TextAlignVertical.center,
-                                        decoration: InputDecoration(
-                                          isDense: true,
-                                          filled: true,
-                                          fillColor: Colors.white,
-                                          hintText: 'Name',
-                                          border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(12),
-                                            borderSide: BorderSide.none,
+                                      SizedBox(
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                        child: TextFormField(
+                                          // controller: dateController,
+                                          textAlignVertical:
+                                              TextAlignVertical.center,
+                                          decoration: InputDecoration(
+                                            isDense: true,
+                                            filled: true,
+                                            fillColor: Colors.white,
+                                            hintText: 'Name',
+                                            border: OutlineInputBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(12),
+                                              borderSide: BorderSide.none,
+                                            ),
                                           ),
                                         ),
                                       ),
@@ -164,29 +170,64 @@ class _AddExpenseState extends State<AddExpense> {
                                                   bottom: Radius.circular(12),
                                                 ),
                                               ),
-                                              child: ListView.builder(
-                                                itemCount:
-                                                    myCategoriesIcons.length,
-                                                itemBuilder: (context, int i) {
-                                                  return Container(
-                                                    width: 30,
-                                                    height: 30,
-                                                    decoration: BoxDecoration(
-                                                      image: DecorationImage(
-                                                        image: AssetImage(
-                                                            'assets/${myCategoriesIcons[i]}.png'),
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.all(8.0),
+                                                child: GridView.builder(
+                                                  gridDelegate:
+                                                      SliverGridDelegateWithFixedCrossAxisCount(
+                                                    crossAxisCount: 3,
+                                                    mainAxisSpacing: 5,
+                                                    crossAxisSpacing: 5,
+                                                  ),
+                                                  itemCount:
+                                                      myCategoriesIcons.length,
+                                                  itemBuilder:
+                                                      (context, int i) {
+                                                    return GestureDetector(
+                                                      onTap: () {
+                                                        setState(() {
+                                                          iconSelected =
+                                                              myCategoriesIcons[
+                                                                  i];
+                                                        });
+                                                      },
+                                                      child: Container(
+                                                        width: 50,
+                                                        height: 50,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          border: Border.all(
+                                                              width: 3,
+                                                              color: iconSelected ==
+                                                                      myCategoriesIcons[
+                                                                          i]
+                                                                  ? Colors.green
+                                                                  : Colors
+                                                                      .grey),
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(12),
+                                                          image:
+                                                              DecorationImage(
+                                                            image: AssetImage(
+                                                                'assets/${myCategoriesIcons[i]}.png'),
+                                                          ),
+                                                        ),
                                                       ),
-                                                    ),
-                                                  );
-                                                },
+                                                    );
+                                                  },
+                                                ),
                                               ),
                                             )
                                           : Container(),
                                       SizedBox(height: 16.0),
                                       TextFormField(
                                         // controller: dateController,
+                                        onTap: () {},
                                         textAlignVertical:
                                             TextAlignVertical.center,
+                                        readOnly: true,
                                         decoration: InputDecoration(
                                           isDense: true,
                                           filled: true,
