@@ -12,6 +12,6 @@ SpendSmart is a mobile application designed to make personal finance management 
 - Smart Notifications: Get alerts when you’re nearing your budget limits.
 
 <h2>Technology Used</h2>
-- Frontend: Flutter,Dart
+- Frontend: Flutter,Dart <br>
 - Backend:  Firebase
 
