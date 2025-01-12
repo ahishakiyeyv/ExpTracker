@@ -1,8 +1,12 @@
+import 'package:expense_repository/expense_repository.dart';
+import 'package:exptracker/screens/add_expense/blocs/create_categorybloc/create_category_bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
+import 'package:uuid/uuid.dart';
 
 class AddExpense extends StatefulWidget {
   const AddExpense({super.key});
@@ -101,6 +105,13 @@ class _AddExpenseState extends State<AddExpense> {
                             bool isExpended = false;
                             String iconSelected = '';
                             Color categoryColor = Colors.white;
+
+                            TextEditingController categoryNameController =
+                                TextEditingController();
+                            TextEditingController categoryIconController =
+                                TextEditingController();
+                            TextEditingController categoryColorController =
+                                TextEditingController();
                             return StatefulBuilder(
                               builder: (context, setState) {
                                 return AlertDialog(
@@ -112,7 +123,7 @@ class _AddExpenseState extends State<AddExpense> {
                                         width:
                                             MediaQuery.of(context).size.width,
                                         child: TextFormField(
-                                          // controller: dateController,
+                                          controller: categoryNameController,
                                           textAlignVertical:
                                               TextAlignVertical.center,
                                           decoration: InputDecoration(
@@ -130,7 +141,7 @@ class _AddExpenseState extends State<AddExpense> {
                                       ),
                                       SizedBox(height: 16.0),
                                       TextFormField(
-                                        // controller: dateController,
+                                        controller: categoryIconController,
                                         onTap: () {
                                           setState(() {
                                             isExpended = !isExpended;
@@ -224,7 +235,7 @@ class _AddExpenseState extends State<AddExpense> {
                                           : Container(),
                                       SizedBox(height: 16.0),
                                       TextFormField(
-                                        // controller: dateController,
+                                        controller: categoryColorController,
                                         onTap: () {
                                           showDialog(
                                               context: context,
@@ -304,7 +315,19 @@ class _AddExpenseState extends State<AddExpense> {
                                         child: TextButton(
                                           onPressed: () {
                                             //create category object and POP
-                                            Navigator.pop(context);
+                                            Category category = Category.empty;
+                                            category.categoryId =
+                                                const Uuid().v4();
+                                            category.name =
+                                                categoryNameController.text;
+                                            category.icon = iconSelected;
+                                            category.color =
+                                                categoryColor.toString();
+                                            context
+                                                .read<CreateCategoryBloc>()
+                                                .add(CreateCategory(
+                                                    category: category));
+                                            // Navigator.pop(context);
                                           },
                                           style: TextButton.styleFrom(
                                             backgroundColor: Colors.black,
