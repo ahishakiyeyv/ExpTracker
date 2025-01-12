@@ -1,16 +1,16 @@
-# exptracker
+#SpendSmart App
 
-A new Flutter project.
+#Overview
+SpendSmart is a mobile application designed to make personal finance management effortless. With features like automated expense tracking, budget creation, and real-time insights, SpendSmart empowers users to take control of their finances, save smarter, and spend more wisely.
 
-## Getting Started
+#Features
 
-This project is a starting point for a Flutter application.
+- Automated Expense Tracking: Easily categorize and monitor your expenses
+- Real-Time Insights: Visualize your spending habits with intuitive charts
+- Data Security: Built with end-to-end encryption to ensure your financial data stays private.
+- Smart Notifications: Get alerts when you’re nearing your budget limits.
 
-A few resources to get you started if this is your first Flutter project:
+#Technology Used
+- Frontend: Flutter,Dart
+- Backend:  Firebase
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
