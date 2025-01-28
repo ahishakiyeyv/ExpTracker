@@ -1,5 +1,6 @@
 import 'package:expense_repository/expense_repository.dart';
 import 'package:exptracker/screens/add_expense/blocs/create_categorybloc/create_category_bloc.dart';
+import 'package:exptracker/screens/add_expense/blocs/get_categoriesbloc/get_categories_bloc.dart';
 import 'package:exptracker/screens/add_expense/views/add_expense.dart';
 import 'package:exptracker/screens/home/views/main_screen.dart';
 import 'package:exptracker/screens/stats/stats.dart';
@@ -61,10 +62,19 @@ class _HomeScreenState extends State<HomeScreen> {
           Navigator.push(
             context,
             MaterialPageRoute<void>(
-              builder: (BuildContext context) => BlocProvider(
-                create: (context) => CreateCategoryBloc(
-                  FirebaseExpenseRepo(),
-                ),
+              builder: (BuildContext context) => MultiBlocProvider(
+                providers: [
+                  BlocProvider(
+                    create: (context) => CreateCategoryBloc(
+                      FirebaseExpenseRepo(),
+                    ),
+                  ),
+                  BlocProvider(
+                    create: (context) =>
+                        GetCategoriesBloc(FirebaseExpenseRepo())
+                          ..add(GetCategoriesLoading()),
+                  ),
+                ],
                 child: const AddExpense(),
               ),
             ),
